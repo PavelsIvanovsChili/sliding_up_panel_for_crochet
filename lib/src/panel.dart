@@ -716,7 +716,7 @@ class PanelController {
   }
 
   /// Sets the panel scrolling enabled value.
-  set panelScrollingEnabled(bool value) {
+  void setPanelScrollingEnabled(bool value) {
     assert(isAttached, "PanelController must be attached to a SlidingUpPanel");
     _panelState!._setScrollingEnabled(value);
   }
