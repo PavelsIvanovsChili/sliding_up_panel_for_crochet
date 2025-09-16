@@ -616,6 +616,12 @@ class _SlidingUpPanelState extends State<SlidingUpPanel>
     return _ac.animateTo(widget.snapPoint!, duration: duration, curve: curve);
   }
 
+  //sets scrolling enabled value
+  void _setScrollingEnabled(bool value) {
+    if (_scrollingEnabled == value) return;
+    setState(() => _scrollingEnabled = value);
+  }
+
   //set the panel position to value - must
   //be between 0.0 and 1.0
   set _panelPosition(double value) {
@@ -709,6 +715,12 @@ class PanelController {
         ._animatePanelToSnapPoint(duration: duration, curve: curve);
   }
 
+  /// Sets the panel scrolling enabled value.
+  set panelScrollingEnabled(bool value) {
+    assert(isAttached, "PanelController must be attached to a SlidingUpPanel");
+    _panelState!._setScrollingEnabled(value);
+  }
+
   /// Sets the panel position (without animation).
   /// The value must between 0.0 and 1.0
   /// where 0.0 is fully collapsed and 1.0 is completely open.
@@ -755,5 +767,12 @@ class PanelController {
   bool get isPanelShown {
     assert(isAttached, "PanelController must be attached to a SlidingUpPanel");
     return _panelState!._isPanelShown;
+  }
+
+  /// Returns whether or not the
+  /// panel scrolling is enabled.
+  bool get isPanelScrollingEnabled {
+    assert(isAttached, "PanelController must be attached to a SlidingUpPanel");
+    return _panelState!._scrollingEnabled;
   }
 }
